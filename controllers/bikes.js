@@ -28,4 +28,11 @@ bikesRouter.get('/', async (request, response) => {
   response.json(bike)
 })
 
+bikesRouter.get('/count', async (request, response) => {
+  const { filter } = aqp(request.query)
+  const bike = await Bike
+    .count(filter)
+  response.json(bike)
+})
+
 module.exports = bikesRouter
