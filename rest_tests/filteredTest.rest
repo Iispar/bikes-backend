@@ -1,0 +1,1 @@
+GET http://localhost:3001/api/bikers?Duration>2000&limit=30

@@ -4,13 +4,12 @@ const aqp =  require('api-query-params')
 let filter = ""
 
 /**
- * A method to get first x amount of bikes when the page is loaded and no filters
- * are used. This also changes when the filter variable changes as it sets the filters
- * for the search
+ * A method to get first 10 bikes when the page is loaded and no filters
+ * are used.
  */
 bikesRouter.get('/all', async (request, response) => {
   const bike = await Bike
-    .find({Covered_distance: 100}).limit(10).lean()
+    .find({}).limit(10).lean()
   response.json(bike)
 })
 
@@ -20,8 +19,8 @@ bikesRouter.get('/all', async (request, response) => {
  */
 bikesRouter.get('/', async (request, response) => {
   const { filter, limit, sort } = aqp(request.query)
-  console.log(limit)
   console.log(filter)
+  console.log(limit)
   const bike = await Bike
     .find(filter).sort(sort).limit(limit).lean()
   response.json(bike)
