@@ -21,4 +21,4 @@ The backend has some rest api call tests and also jest tests. Rest calls can be 
 by pressing the button on top of GET. 
 Jest tests on the other hand can be ran by downloading the project and using npm test. This needs the connection to mongoDB to work!
 # Technologies
-I used JavaScript for the code. MongoDB for the database, mongoose for the connection to the database. I also used express.
+I used JavaScript for the code. MongoDB for the database, mongoose for the connection to the database. I also used express for the communication and node for the framework.
