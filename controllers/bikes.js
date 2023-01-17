@@ -1,7 +1,6 @@
 const bikesRouter = require('express').Router()
 const Bike = require('../models/Bike')
 const aqp =  require('api-query-params')
-let filter = ""
 
 /**
  * A method to get first 10 bikes when the page is loaded and no filters
@@ -9,7 +8,9 @@ let filter = ""
  */
 bikesRouter.get('/all', async (request, response) => {
   const bike = await Bike
-    .find({}).limit(10).lean()
+    .find({})
+    .limit(10)
+    .lean()
   response.json(bike)
 })
 
@@ -19,10 +20,11 @@ bikesRouter.get('/all', async (request, response) => {
  */
 bikesRouter.get('/', async (request, response) => {
   const { filter, limit, sort } = aqp(request.query)
-  console.log(filter)
-  console.log(limit)
   const bike = await Bike
-    .find(filter).sort(sort).limit(limit).lean()
+    .find(filter)
+    .sort(sort)
+    .limit(limit)
+    .lean()
   response.json(bike)
 })
 
