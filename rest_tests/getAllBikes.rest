@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/bikers?Departure_station_id=271&limit=2
+GET http://localhost:3001/api/bikers/all
