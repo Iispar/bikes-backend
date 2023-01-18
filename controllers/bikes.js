@@ -28,11 +28,14 @@ bikesRouter.get('/', async (request, response) => {
   response.json(bike)
 })
 
+/**
+ * Method for API call that counts the amount of items. used with example how many journeys.
+ */
 bikesRouter.get('/count', async (request, response) => {
   const { filter } = aqp(request.query)
-  const bike = await Bike
+  const result = await Bike
     .count(filter)
-  response.json(bike)
+  response.json(result)
 })
 
 module.exports = bikesRouter

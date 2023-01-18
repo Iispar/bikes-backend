@@ -40,9 +40,14 @@ describe('bike api tests', () => {
         const res = await api
             .get('/api/bikers?sort=-Duration&limit=10')
 
-        console.log(res.body)
         expect(res.body[1].Duration <= res.body[0].Duration).toBeTruthy()
         expect(res.body[4].Duration <= res.body[3].Duration).toBeTruthy()
+    })
+
+    test('counting works', async () => {
+        const res = await api
+            .get('/api/bikers/count?Return_station_id=100')
+        expect(res.body).toBe(1348)
     })
 })
 
