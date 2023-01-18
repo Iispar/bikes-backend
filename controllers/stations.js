@@ -19,9 +19,10 @@ stationsRouter.get('/all', async (request, response) => {
  * We use api-query-params to get the params from the url query.
  */
 stationsRouter.get('/', async (request, response) => {
-  const { filter, limit, sort } = aqp(request.query)
+  const { filter, limit, sort, skip } = aqp(request.query)
   const station = await Station
     .find(filter)
+    .skip(skip)
     .sort(sort)
     .limit(limit)
     .lean()
