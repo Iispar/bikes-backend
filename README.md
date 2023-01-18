@@ -3,9 +3,7 @@ This is the backend for the pre-requisite project for solitas job listing.
 In this project we had an csv file with trips done on citybikes. I transformed this into and mongoDB database and
 created and backend with API calls to the database. This API can be used for the frontend which is the other part
 of this project.
-HOX! for the person reviewing this. I only used one of the csv files for bike data (2021-05), because 
-I ran into storage problems with mongoDB as the free version wasn't large enough. I hope this doesn't matter
-that much and I believe my skills can be seen still. I also filtered the data beforehand with pandas and wasn't sure
+HOX! For the person reviewing this: I filtered the data beforehand with pandas in python and wasn't sure
 if this was something you would have liked to see, but I can tell you more if needed.
 # Prerequisites and Configurations
 The connection to the database is in an .env file so if you want to run this on your own computer you either need to 
