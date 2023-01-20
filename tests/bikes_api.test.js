@@ -47,8 +47,42 @@ describe('bike api tests', () => {
     test('counting works', async () => {
         const res = await api
             .get('/api/bikers/count?Return_station_id=100')
-        expect(res.body).toBe(1348)
+        expect(res.body).toBe(2491)
     })
+
+    test('Average distance works', async () => {
+        const resDistanceReturn5 = await api
+            .get('/api/bikers/average/return/100/5')
+        expect(resDistanceReturn5.body[0].average).toBe(2875.9930505952384)
+        const resDistanceReturnAll = await api
+            .get('/api/bikers/average/return/100/all')
+        expect(resDistanceReturnAll.body[0].average).toBe(3062.8166720192694)
+
+        const resDistanceDeparture6 = await api
+            .get('/api/bikers/average/departure/150/6')
+        expect(resDistanceDeparture6.body[0].average).toBe(2612.1708780795957)
+        const resDistanceDepartureAll = await api
+            .get('/api/bikers/average/departure/150/all')
+        expect(resDistanceDepartureAll.body[0].average).toBe(2598.414327868852)
+    })
+
+    test('top5 works', async () => {
+        const resReturn = await api
+            .get('/api/bikers/top/return/100')
+        expect(resReturn.body[0]._id).toBe('94')
+        expect(resReturn.body[1]._id).toBe('101')
+        expect(resReturn.body[2]._id).toBe('100')
+        expect(resReturn.body[3]._id).toBe('208')
+        expect(resReturn.body[4]._id).toBe('93')
+
+        const resDeparture = await api
+            .get('/api/bikers/top/departure/100')
+        expect(resDeparture.body[0]._id).toBe('94')
+        expect(resDeparture.body[1]._id).toBe('101')
+        expect(resDeparture.body[2]._id).toBe('100')
+        expect(resDeparture.body[3]._id).toBe('208')
+        expect(resDeparture.body[4]._id).toBe('209')
+        })
 })
 
 afterAll(() => {

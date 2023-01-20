@@ -78,7 +78,7 @@ bikesRouter.get('/average/return/:id/:month', async (request, response) => {
     month = parseInt(month)
     result = await Bike.aggregate([
       { $addFields: { 'Month' : { $month: '$Departure' }}},
-      { $match: {'$and': [{'Return': id}, {'Month': month}]}},
+      { $match: {'$and': [{'Return_station_id': id}, {'Month': month}]}},
       { $group: {_id: null, average: { $avg: '$Covered_distance'}}}
     ])
   }
