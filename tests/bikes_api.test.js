@@ -68,7 +68,7 @@ describe('bike api tests', () => {
 
     test('top5 works', async () => {
         const resReturn = await api
-            .get('/api/bikers/top/return/100')
+            .get('/api/bikers/top/return/100/all')
         expect(resReturn.body[0]._id).toBe('94')
         expect(resReturn.body[1]._id).toBe('101')
         expect(resReturn.body[2]._id).toBe('100')
@@ -76,7 +76,7 @@ describe('bike api tests', () => {
         expect(resReturn.body[4]._id).toBe('93')
 
         const resDeparture = await api
-            .get('/api/bikers/top/departure/100')
+            .get('/api/bikers/top/departure/100/all')
         expect(resDeparture.body[0]._id).toBe('94')
         expect(resDeparture.body[1]._id).toBe('101')
         expect(resDeparture.body[2]._id).toBe('100')

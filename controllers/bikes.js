@@ -88,27 +88,51 @@ bikesRouter.get('/average/return/:id/:month', async (request, response) => {
 /**
  * Return a list of 5 most common stations that are visited from parameter station
  */
-bikesRouter.get('/top/departure/:id', async (request, response) => {
+bikesRouter.get('/top/departure/:id/:month', async (request, response) => {
   const id = request.params.id
-  const result = await Bike.aggregate([
-    { $match: {'Departure_station_id': id}},
-    { $sortByCount: '$Return_station_id'},
-    { $limit: 5}
-  ])
-  response.json(result)
+  let month = request.params.month
+  if (month === 'all') {
+    const result = await Bike.aggregate([
+      { $match: {'Departure_station_id': id}},
+      { $sortByCount: '$Return_station_id'},
+      { $limit: 5}
+    ])
+    response.json(result)
+  } else {
+    month = parseInt(month)
+    const result = await Bike.aggregate([
+      { $addFields: { 'Month' : { $month: '$Departure' }}},
+      { $match: {'$and': [{'Departure_station_id': id}, {'Month': month}]}},
+      { $sortByCount: '$Return_station_id'},
+      { $limit: 5}
+    ])
+    response.json(result)
+  }
 })
 
 /**
  * Return a list of 5 most common stations that users come from to this station.
  */
-bikesRouter.get('/top/return/:id', async (request, response) => {
+bikesRouter.get('/top/return/:id/:month', async (request, response) => {
   const id = request.params.id
-  const result = await Bike.aggregate([
-    { $match: {'Return_station_id': id}},
-    { $sortByCount: '$Departure_station_id'},
-    { $limit: 5}
-  ])
-  response.json(result)
+  let month = request.params.month
+  if (month === 'all') {
+    const result = await Bike.aggregate([
+      { $match: {'Return_station_id': id}},
+      { $sortByCount: '$Departure_station_id'},
+      { $limit: 5}
+    ])
+    response.json(result)
+  } else {
+    month = parseInt(month)
+    const result = await Bike.aggregate([
+      { $addFields: { 'Month' : { $month: '$Departure' }}},
+      { $match: {'$and': [{'Return_station_id': id}, {'Month': month}]}},
+      { $sortByCount: '$Departure_station_id'},
+      { $limit: 5}
+    ])
+    response.json(result)
+  }
 })
 
 module.exports = bikesRouter
