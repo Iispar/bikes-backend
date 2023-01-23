@@ -46,11 +46,11 @@ describe('bike api tests', () => {
 
   test('counting works', async () => {
     const res = await api
-      .get('/api/bikers/count/100/all');
-    expect(res.body[0].count).toBe(2453);
+      .get('/api/bikers/count/return/100/all');
+    expect(res.body[0].count).toBe(2491);
 
     const res2 = await api
-      .get('/api/bikers/count/100/5');
+      .get('/api/bikers/count/departure/100/5');
     expect(res2.body[0].count).toBe(672);
   });
 

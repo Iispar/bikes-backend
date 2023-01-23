@@ -34,7 +34,7 @@ bikesRouter.get('/', async (request, response) => {
 /**
  * Method for API call that counts the amount of items. used with example how many journeys.
  */
-bikesRouter.get('/count/:id/:month', async (request, response) => {
+bikesRouter.get('/count/departure/:id/:month', async (request, response) => {
   const { id } = request.params;
   let { month } = request.params;
   if (month === 'all') {
@@ -48,6 +48,29 @@ bikesRouter.get('/count/:id/:month', async (request, response) => {
     const result = await Bike.aggregate([
       { $addFields: { Month: { $month: '$Departure' } } },
       { $match: { $and: [{ Departure_station_id: id }, { Month: month }] } },
+      { $count: 'count' },
+    ]);
+    response.json(result);
+  }
+});
+
+/**
+ * Method for API call that counts the amount of items. used with example how many journeys.
+ */
+bikesRouter.get('/count/return/:id/:month', async (request, response) => {
+  const { id } = request.params;
+  let { month } = request.params;
+  if (month === 'all') {
+    const result = await Bike.aggregate([
+      { $match: { Return_station_id: id } },
+      { $count: 'count' },
+    ]);
+    response.json(result);
+  } else {
+    month = parseInt(month, 10);
+    const result = await Bike.aggregate([
+      { $addFields: { Month: { $month: '$Return' } } },
+      { $match: { $and: [{ Return_station_id: id }, { Month: month }] } },
       { $count: 'count' },
     ]);
     response.json(result);
