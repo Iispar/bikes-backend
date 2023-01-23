@@ -46,8 +46,12 @@ describe('bike api tests', () => {
 
     test('counting works', async () => {
         const res = await api
-            .get('/api/bikers/count?Return_station_id=100')
-        expect(res.body).toBe(2491)
+            .get('/api/bikers/count/100/all')
+        expect(res.body[0].count).toBe(2453)
+
+        const res2 = await api
+            .get('/api/bikers/count/100/5')
+        expect(res2.body[0].count).toBe(672)
     })
 
     test('Average distance works', async () => {
