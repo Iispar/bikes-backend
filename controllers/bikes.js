@@ -9,7 +9,7 @@ const Bike = require('../models/Bike');
 bikesRouter.get('/all', async (request, response) => {
   const bike = await Bike
     .find({})
-    .limit(10)
+    .limit(9)
     .lean();
   response.json(bike);
 });
