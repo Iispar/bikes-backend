@@ -9,7 +9,7 @@ const Station = require('../models/Station');
 stationsRouter.get('/all', async (request, response) => {
   const station = await Station
     .find({})
-    .limit(10)
+    .limit(8)
     .lean();
   response.json(station);
 });

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+/* eslint-disable no-param-reassign */
+const mongoose = require('mongoose');
 
 const stationSchema = new mongoose.Schema({
   FID: String,
@@ -13,13 +14,13 @@ const stationSchema = new mongoose.Schema({
   Operator: String,
   capasity: String,
   x: String,
-  y: String
-})
+  y: String,
+});
 
 stationSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    delete returnedObject._id
-  }
-})
+    delete returnedObject._id;
+  },
+});
 
-module.exports = mongoose.model('Station', stationSchema)
+module.exports = mongoose.model('Station', stationSchema);
