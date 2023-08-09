@@ -1,4 +1,4 @@
-# solita-backend
+# bikes-backend
 I used HSL's open data about citybikes and their stations to create a backend for the [solita-frontend](https://github.com/Iispar/solita-frontend).
 The [data](https://www.hsl.fi/en/hsl/open-data) was in csv files for each month. I did some small parsing of this data with pandas and python and then deployed it to mongoDB, with two clusters one for stations and one for journeys. The backend is an API that makes the filtered calls to the backend and reformats the data to return for the original call.
 
